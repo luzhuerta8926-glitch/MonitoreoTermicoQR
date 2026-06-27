@@ -1,36 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MonitoreoTermicoQR</title>
-   <style>
-   
-    body{
-     margin:0;
-     font-family: Arial,sans-serif;
-     background-color: #f0f4f8;
-     color: #1a1a2e;
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
     }
 
     header {
-    background-color: #1565c0;
-     color: white;
-     text-align: center;
-     padding: 40px 20px;
+      background-color: #1565c0;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
     }
-    header p{
-    font-size: 18px;
-    margin-top: 10px;
+
+    .alerta {
+      background-color: #c62828;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 10px;
+      font-size: 20px;
     }
-  
+
+    .tarjetas {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tarjeta {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 250px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-top: 5px solid #1565c0;
+    }
+
+    .tarjeta h2 {
+      color: #1565c0;
+      font-size: 18px;
+    }
+
+    .tarjeta ul {
+      padding-left: 20px;
+    }
+
+    .tarjeta li {
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .emergencia {
+      text-align: center;
+      background-color: #1565c0;
+      color: white;
+      padding: 30px;
+      font-size: 24px;
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 14px;
+    }
   </style>
-  </head>
-  <body>
-    <header><h1> MonitoreoTermicoQR</h1>
-    <p> Sistema inteligente para prevenir golpes de calor</p>
-     </header>
-  
-  </body>
+</head>
+<body>
+
+  <header>
+    <h1>🌡️ MonitoreoTermicoQR</h1>
+    <p>Sistema inteligente para prevenir golpes de calor</p>
+  </header>
+
+  <div class="alerta">
+    ⚠️ Condición de calor detectada — Actúa de inmediato
+  </div>
+
+  <div class="tarjetas">
+
+    <div class="tarjeta">
+      <h2>🤒 Síntomas</h2>
+      <ul>
+        <li>Dolor de cabeza</li>
+        <li>Piel seca y caliente</li>
+        <li>Confusión o mareos</li>
+      </ul>
+    </div>
+
+    <div class="tarjeta">
+      <h2>🧊 Primeros auxilios</h2>
+      <ul>
+        <li>Lleva a lugar fresco</li>
+        <li>Aplica agua fría</li>
+        <li>Da agua si está consciente</li>
+      </ul>
+    </div>
+
+    <div class="tarjeta">
+      <h2>🛡️ Prevención</h2>
+      <ul>
+        <li>Toma agua cada 20 min</li>
+        <li>Evita el sol entre 11am-3pm</li>
+        <li>Usa ropa ligera</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="emergencia">
+    📞 Emergencias en Perú: <strong>106</strong> (SAMU)
+  </div>
+
+  <footer>
+    <p>Proyecto desarrollado por: <strong>Tu nombre</strong></p>
+    <p>Tu colegio</p>
+  </footer>
+
+</body>
 </html>
