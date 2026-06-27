@@ -140,6 +140,16 @@
 <div class="clima" id="clima">
   Cargando temperatura de La Unión ...
  </div>
-  
+  <script>
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=-5.19&longitude=-80.63&current_weather=true')
+    .then(r=>r.json())
+    .then(d=> {
+      const t= d.current_weather.temperature;
+      document.getElementById('Clima').innerHTML;
+      T>=35? 'La Union: '+t+'°C-¡Peligro!':
+      T>=28? 'La Union: '+t+'°C-Precacución':
+             'La Union: '+t+'°C-Normal':
+    });
+  </script>
 </body>
 </html>
