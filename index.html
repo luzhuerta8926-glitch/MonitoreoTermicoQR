@@ -11,18 +11,26 @@
       background-color: #f0f4f8;
     }
 
-    header {
-      background-color: #1565c0;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
+   header {
+  background-color: #1565c0;
+  color: white;
+  padding: 40px 20px;
+}
 
-    .termometro {
-      text-align: center;
-      padding: 20px;
-      background-color: #1565c0;
-    }
+.header-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.termometro {
+  text-align: center;
+}
+
+.termometro p {
+  color: white;
+}
 
     .tubo {
       width: 30px;
@@ -124,17 +132,19 @@
 </head>
 <body>
 
-  <header>
-    <h1>🌡️ MonitoreoTermicoQR</h1>
-    <p>Sistema inteligente para prevenir golpes de calor</p>
-  </header>
-
-  <div class="termometro">
-    <div class="tubo">
-      <div class="mercurio"></div>
+<header>
+  <div class="header-contenido">
+    <div class="termometro">
+      <div class="tubo">
+        <div class="mercurio"></div>
+      </div>
     </div>
-    <p>Indicador de calor</p>
+    <div>
+      <h1>🌡️ MonitoreoTermicoQR</h1>
+      <p>Sistema inteligente para prevenir golpes de calor</p>
+    </div>
   </div>
+</header>
 
   <div class="alerta">
     Condición de calor detectada — Actúa de inmediato
