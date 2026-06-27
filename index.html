@@ -5,43 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MonitoreoTermicoQR</title>
   <style>
-    .termometro {
-      text-align: center;
-      padding: 20px;
-    }
-    .tubo {
-      width: 30px;
-      height: 150px;
-      background-color: #e0e0e0;
-      border-radius: 20px;
-      margin: 0 auto;
-      overflow:  hidden;
-      position: relative;
-    }
-
-    .mercurio{
-      width: 100px;
-      background-color: #c62828;
-      position: absolute;
-      bottom: 0;
-      border-radius: 20px;
-      animation: subir 2s ease-in-out infinite alternate;
-    }
-    @keyframes subir{
-      from {heigt: 30%;}
-      to { height: 85%;}
-      
-    }
-    .clima {
-      text-align: center;
-      background-color: white;
-      color: #1565c0;
-      padding: 20px;
-      margin: 20px;
-      border-radius: 10px;
-      font-size: 22px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -53,6 +16,40 @@
       color: white;
       text-align: center;
       padding: 40px 20px;
+    }
+
+    .termometro {
+      text-align: center;
+      padding: 20px;
+      background-color: #1565c0;
+    }
+
+    .tubo {
+      width: 30px;
+      height: 150px;
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mercurio {
+      width: 100%;
+      background-color: #c62828;
+      position: absolute;
+      bottom: 0;
+      border-radius: 20px;
+      animation: subir 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes subir {
+      from { height: 30%; }
+      to { height: 85%; }
+    }
+
+    .termometro p {
+      color: white;
     }
 
     .alerta {
@@ -106,6 +103,17 @@
       border-radius: 10px;
     }
 
+    .clima {
+      text-align: center;
+      background-color: white;
+      color: #1565c0;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 10px;
+      font-size: 22px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -117,15 +125,16 @@
 <body>
 
   <header>
-    <div class="termometro">
-      <div class="tubo">
-        <div class="mercurio"></div>
-      </div>
-      <p> Indicador de calor</p>
-    </div>
-        <h1>MonitoreoTermicoQR</h1>
+    <h1>🌡️ MonitoreoTermicoQR</h1>
     <p>Sistema inteligente para prevenir golpes de calor</p>
   </header>
+
+  <div class="termometro">
+    <div class="tubo">
+      <div class="mercurio"></div>
+    </div>
+    <p>Indicador de calor</p>
+  </div>
 
   <div class="alerta">
     Condición de calor detectada — Actúa de inmediato
@@ -134,7 +143,7 @@
   <div class="tarjetas">
 
     <div class="tarjeta">
-      <h2>  Síntomas</h2>
+      <h2>Síntomas</h2>
       <ul>
         <li>Dolor de cabeza</li>
         <li>Piel seca y caliente</li>
@@ -143,7 +152,7 @@
     </div>
 
     <div class="tarjeta">
-      <h2>Primeros auxilios</h2>
+      <h2>🧊 Primeros auxilios</h2>
       <ul>
         <li>Lleva a lugar fresco</li>
         <li>Aplica agua fría</li>
@@ -152,7 +161,7 @@
     </div>
 
     <div class="tarjeta">
-      <h2> Prevención</h2>
+      <h2>🛡️ Prevención</h2>
       <ul>
         <li>Toma agua cada 20 min</li>
         <li>Evita el sol entre 11am-3pm</li>
@@ -163,26 +172,29 @@
   </div>
 
   <div class="emergencia">
-    Emergencias en Perú: <strong>106</strong> (SAMU)
+     Emergencias en Perú: <strong>106</strong> (SAMU)
+  </div>
+
+  <div class="clima" id="clima">
+    Cargando temperatura de La Unión...
   </div>
 
   <footer>
     <p>Proyecto desarrollado por: <strong>Alejandra Huerta</strong></p>
-    <p>Instituto de Educación Superior Tecnológico Público - La Unión </p>
+    <p>Instituto de Educación Superior Tecnológico Público - La Unión</p>
   </footer>
-<div class="clima" id="clima">
-  Cargando temperatura de La Unión ...
- </div>
+
   <script>
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=-5.19&longitude=-80.63&current_weather=true')
-    .then(r=>r.json())
-    .then(d=> {
-      const t= d.current_weather.temperature;
-      document.getElementById('Clima').innerHTML;
-      T>=35? 'La Union: '+t+'°C-¡Peligro!':
-      T>=28? 'La Union: '+t+'°C-Precacución':
-             'La Union: '+t+'°C-Normal':
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=-4.40&longitude=-80.23&current_weather=true')
+    .then(r => r.json())
+    .then(d => {
+      const t = d.current_weather.temperature;
+      document.getElementById('clima').innerHTML =
+      t >= 35 ? 'La Unión: ' + t + '°C — ¡Peligro!' :
+      t >= 28 ? 'La Unión: ' + t + '°C — Precaución' :
+                'La Unión: ' + t + '°C — Normal';
     });
   </script>
+
 </body>
 </html>
