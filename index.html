@@ -5,226 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MonitoreoTermicoQR</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f4f8;
-    }
-
-    header {
-      background-color: #1565c0;
-      color: white;
-      padding: 40px 20px;
-    }
-
-    .header-contenido {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-    }
-
-    .termometro {
-      text-align: center;
-    }
-
-    .termometro p {
-      color: white;
-    }
-    .tubo {
-      width: 20px;
-      height: 80px;
-      background-color: #e0e0e0;
-      border-radius: 20px;
-      margin: 0 auto;
-      overflow: hidden;
-      position: relative;
-    }
-  
-    .mercurio {
-      width: 100%;
-      background-color: #c62828;
-      position: absolute;
-      bottom: 0;
-      border-radius: 20px;
-      animation: subir 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes subir {
-      from { height: 30%; }
-      to { height: 85%; }
-    }
-
-    /* Clases de estado dinámicas para la alerta */
-    .alerta {
-      text-align: center;
-      padding: 20px;
-      margin: 20px;
-      border-radius: 10px;
-      font-size: 20px;
-      color: white;
-      transition: background-color 0.3s ease;
-    }
-
-    .alerta.peligro {
-      background-color: #c62828; /* Rojo */
-    }
-
-    .alerta.precaucion {
-      background-color: #f57c00; /* Naranja */
-    }
-
-    .alerta.normal {
-      background-color: #2e7d32; /* Verde seguro */
-    }
-
-    .tarjetas {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-      flex-wrap: wrap;
-    }
-
-    .tarjeta {
-      background-color: white;
-      border-radius: 10px;
-      padding: 20px;
-      width: 250px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-top: 5px solid #1565c0;
-    }
-
-    .tarjeta h2 {
-      color: #1565c0;
-      font-size: 18px;
-    }
-
-    .tarjeta ul {
-      padding-left: 20px;
-    }
-
-    .tarjeta li {
-      margin-bottom: 8px;
-      color: #333;
-    }
-
-    .emergencia {
-      text-align: center;
-      background-color: #1565c0;
-      color: white;
-      padding: 30px;
-      font-size: 24px;
-      margin: 20px;
-      border-radius: 10px;
-    }
-
-    .clima {
-      text-align: center;
-      background-color: white;
-      color: #1565c0;
-      padding: 20px;
-      margin: 20px;
-      border-radius: 10px;
-      font-size: 22px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #888;
-      font-size: 14px;
-    }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f0f4f8; text-align: center; }
+    header { background: #1565c0; color: white; padding: 20px; }
+    .alerta { padding: 15px; margin: 15px; border-radius: 8px; color: white; font-size: 18px; }
+    .normal { background: #2e7d32; }
+    .precaucion { background: #f57c00; }
+    .peligro { background: #c62828; }
+    .tarjetas { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 10px; }
+    .tarjeta { background: white; border-radius: 8px; padding: 15px; width: 220px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: left; }
+    .tarjeta h2 { color: #1565c0; font-size: 16px; margin-top: 0; }
+    .emergencia, .clima { background: white; padding: 15px; margin: 15px; border-radius: 8px; font-size: 18px; color: #1565c0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .emergencia { background: #1565c0; color: white; }
+    footer { color: #888; font-size: 12px; padding: 10px; }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="header-contenido">
-    <div class="termometro">
-      <div class="tubo">
-        <div class="mercurio"></div>
-      </div>
-    </div>
-    <div>
-      <h1>🌡️ MonitoreoTermicoQR</h1>
-      <p>Sistema inteligente para prevenir golpes de calor</p>
-    </div>
-  </div>
+  <h1>🌡️ MonitoreoTermicoQR</h1>
+  <p>Sistema inteligente para prevenir golpes de calor</p>
 </header>
 
-  <!-- Contenedor de alerta dinámico con estado inicial neutral -->
-  <div id="contenedor-alerta" class="alerta normal">
-    Cargando estado del sistema...
+<div id="alerta" class="alerta normal">Condición normal — Sin cambios detectados</div>
+
+<div class="tarjetas">
+  <div class="tarjeta">
+    <h2>Síntomas</h2>
+    <ul><li>Dolor de cabeza</li><li>Piel seca y caliente</li><li>Mareos</li></ul>
   </div>
-
-  <div class="tarjetas">
-
-    <div class="tarjeta">
-      <h2>Síntomas</h2>
-      <ul>
-        <li>Dolor de cabeza</li>
-        <li>Piel seca y caliente</li>
-        <li>Confusión o mareos</li>
-      </ul>
-    </div>
-
-    <div class="tarjeta">
-      <h2>🧊 Primeros auxilios</h2>
-      <ul>
-        <li>Lleva a lugar fresco</li>
-        <li>Aplica agua fría</li>
-        <li>Da agua si está consciente</li>
-      </ul>
-    </div>
-
-    <div class="tarjeta">
-      <h2>🛡️ Prevención</h2>
-      <ul>
-        <li>Toma agua cada 20 min</li>
-        <li>Evita el sol entre 11am-3pm</li>
-        <li>Usa ropa ligera</li>
-      </ul>
-    </div>
-
+  <div class="tarjeta">
+    <h2>🧊 Primeros auxilios</h2>
+    <ul><li>Llevar a lugar fresco</li><li>Aplicar agua fría</li><li>Hidratar</li></ul>
   </div>
-
-  <div class="emergencia">
-     Emergencias en Perú: <strong>106</strong> (SAMU)
+  <div class="tarjeta">
+    <h2>🛡️ Prevención</h2>
+    <ul><li>Beber agua seguido</li><li>Evitar sol 11am-3pm</li><li>Usar ropa ligera</li></ul>
   </div>
+</div>
 
-  <div class="clima" id="clima">
-    Cargando temperatura de La Unión...
-  </div>
+<div class="emergencia">Emergencias Perú: <strong>106</strong> (SAMU)</div>
+<div id="clima" class="clima">Cargando clima de La Unión...</div>
 
-  <footer>
-    <p>Proyecto desarrollado por: <strong>Alejandra Huerta</strong></p>
-    <p>Instituto de Educación Superior Tecnológico Público - La Unión</p>
-  </footer>
+<footer>
+  <p>Proyecto desarrollado por: <strong>Alejandra Huerta</strong></p>
+  <p>I.E.S.T.P. La Unión</p>
+</footer>
 
-  <script>
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=-4.40&longitude=-80.23&current_weather=true')
+<script>
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=-4.40&longitude=-80.23&current_weather=true')
     .then(r => r.json())
     .then(d => {
       const t = d.current_weather.temperature;
-      const alertaBox = document.getElementById('contenedor-alerta');
-      
+      const a = document.getElementById('alerta');
       document.getElementById('clima').innerHTML = 'La Unión: ' + t + '°C';
-
-    }
+      
       if (t >= 35) {
-        alertaBox.className = 'alerta peligro';
-        alertaBox.innerHTML = 'Condición de calor detectada — Actúa de inmediato';
+        a.className = 'alerta peligro';
+        a.innerHTML = 'Condición de calor detectada — Actúa de inmediato';
       } else if (t >= 28) {
-        alertaBox.className = 'alerta precaucion';
-        alertaBox.innerHTML = 'Precaución — Mantente hidratado';
+        a.className = 'alerta precaucion';
+        a.innerHTML = 'Precaución — Mantente hidratado';
       } else {
-        alertaBox.className = 'alerta normal';
-        alertaBox.innerHTML = 'Condición normal — Sin cambios detectados';
+        a.className = 'alerta normal';
+        a.innerHTML = 'Condición normal — Sin cambios detectados';
       }
+    }).catch(() => {
+      document.getElementById('clima').innerHTML = 'La Unión: Datos no disponibles';
     });
-  </script>
+</script>
 
 </body>
 </html>
