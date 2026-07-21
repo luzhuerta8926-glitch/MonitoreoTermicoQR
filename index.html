@@ -11,37 +11,36 @@
       background-color: #f0f4f8;
     }
 
-   header {
-    background-color: #1565c0;
-    color: white;
-    padding: 40px 20px;
-  }
+    header {
+      background-color: #1565c0;
+      color: white;
+      padding: 40px 20px;
+    }
 
-  .header-contenido {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-  }
+    .header-contenido {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
 
-  .termometro {
-    text-align: center;
-  }
+    .termometro {
+      text-align: center;
+    }
 
-  .termometro p {
-    color: white;
-  }
-  .tubo {
-    width: 20px;
-    height: 80px;
-    background-color: #e0e0e0;
-    border-radius: 20px;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-  }
+    .termometro p {
+      color: white;
+    }
+    .tubo {
+      width: 20px;
+      height: 80px;
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
   
-
     .mercurio {
       width: 100%;
       background-color: #c62828;
@@ -56,18 +55,27 @@
       to { height: 85%; }
     }
 
-    .termometro p {
-      color: white;
-    }
-
+    /* Clases de estado dinámicas para la alerta */
     .alerta {
-      background-color: #c62828;
-      color: white;
       text-align: center;
       padding: 20px;
       margin: 20px;
       border-radius: 10px;
       font-size: 20px;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .alerta.peligro {
+      background-color: #c62828; /* Rojo */
+    }
+
+    .alerta.precaucion {
+      background-color: #f57c00; /* Naranja */
+    }
+
+    .alerta.normal {
+      background-color: #2e7d32; /* Verde seguro */
     }
 
     .tarjetas {
@@ -146,8 +154,9 @@
   </div>
 </header>
 
-  <div class="alerta">
-    Condición de calor detectada — Actúa de inmediato
+  <!-- Contenedor de alerta dinámico con estado inicial neutral -->
+  <div id="contenedor-alerta" class="alerta normal">
+    Cargando estado del sistema...
   </div>
 
   <div class="tarjetas">
@@ -199,10 +208,21 @@
     .then(r => r.json())
     .then(d => {
       const t = d.current_weather.temperature;
-      document.getElementById('clima').innerHTML =
-      t >= 35 ? 'La Unión: ' + t + '°C — ¡Peligro!' :
-      t >= 28 ? 'La Unión: ' + t + '°C — Precaución' :
-                'La Unión: ' + t + '°C — Normal';
+      const alertaBox = document.getElementById('contenedor-alerta');
+      
+      document.getElementById('clima').innerHTML = 'La Unión: ' + t + '°C';
+
+      // Lógica dinámica para cambiar color y mensaje según la temperatura
+      if (t >= 35) {
+        alertaBox.className = 'alerta peligro';
+        alertaBox.innerHTML = 'Condición de calor detectada — Actúa de inmediato';
+      } else if (t >= 28) {
+        alertaBox.className = 'alerta precaucion';
+        alertaBox.innerHTML = 'Precaución — Mantente hidratado';
+      } else {
+        alertaBox.className = 'alerta normal';
+        alertaBox.innerHTML = 'Condición normal — Sin cambios detectados';
+      }
     });
   </script>
 
